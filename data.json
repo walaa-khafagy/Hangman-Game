@@ -1,0 +1,73 @@
+{
+  "easy": {
+    "animals": [
+      "cat","dog","cow","horse","sheep","goat","lion","tiger","bear","fish","bird","duck",
+      "hen","frog","mouse","rat","pig","deer","fox","wolf"
+    ],
+    "food": [
+      "apple","banana","orange","bread","rice","pizza","burger","cake","cheese","milk",
+      "egg","butter","honey","pasta","corn","beans","meat","soup"
+    ],
+    "colors": [
+      "red","blue","green","yellow","black","white","pink","brown","gray",
+      "purple","orange","cyan"
+    ],
+    "sports": [
+      "football","tennis","boxing","running","swimming","golf",
+      "cycling","skating","karate","judo"
+    ]
+  },
+
+  "medium": {
+    "animals": [
+      "elephant","giraffe","kangaroo","dolphin","penguin","zebra",
+      "crocodile","turtle","rabbit","monkey","panther","leopard",
+      "cheetah","buffalo","hyena","walrus","otter","beaver"
+    ],
+    "countries": [
+      "egypt","canada","brazil","germany","japan","france","italy","spain","turkey",
+      "mexico","argentina","nigeria","kenya","china","india","thailand"
+    ],
+    "food": [
+      "sandwich","chocolate","strawberry","watermelon","omelet","sausage","noodles",
+      "pancake","brownie","icecream","yogurt","salmon","chicken","steak"
+    ],
+    "technology": [
+      "computer","keyboard","internet","browser","software","hardware","database",
+      "network","server","laptop","smartphone","storage","processor"
+    ],
+    "nature": [
+      "mountain","river","forest","desert","island","waterfall","volcano",
+      "glacier","canyon","valley","cliff","plateau"
+    ]
+  },
+
+  "hard": {
+    "animals": [
+      "chimpanzee","hippopotamus","rhinoceros","alligator",
+      "orangutan","chameleon","porcupine","armadillo",
+      "anteater","platypus","echidna","axolotl"
+    ],
+    "countries": [
+      "argentina","indonesia","newzealand","philippines",
+      "kazakhstan","azerbaijan","liechtenstein",
+      "uzbekistan","turkmenistan","madagascar"
+    ],
+    "technology": [
+      "algorithm","encryption","compiler","bandwidth","processor",
+      "virtualization","cryptography","multithreading",
+      "microarchitecture","serialization","decentralization"
+    ],
+    "space": [
+      "asteroid","supernova","blackhole","nebula","cosmology",
+      "gravitational","exoplanet","interstellar",
+      "photosphere","eventhorizon","singularity"
+    ],
+    "random words": [
+      "perseverance","equilibrium","metamorphosis",
+      "consciousness","vulnerability","hronization",
+      "infrastructure","philosophical","transcendental",
+      "unpredictability"
+    ]
+  }
+}

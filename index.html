@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="game">
+            <h1> Hangman Game </h1>
+            <div class="chosen-info">
+                <div id="chosen-difficulty-text"></div>
+                <div id="chosen-category-text"></div>
+            </div>
+            <div class="difficulty">
+                <p>Choose difficulty:</p>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-button" id="easy"> easy </button>
+                    <button class="difficulty-button" id="medium"> medium</button>
+                    <button class="difficulty-button" id="hard"> hard</button>
+                </div>
+            </div>
+            <div class="categories">
+                <p>Choose a category:</p>
+                <div id="container-categories">
+
+                </div>
+            </div>
+            <div class="hangman">
+                <div class="stand-bottom"></div>
+                <div class="rod-vertical"></div>
+                <div class="rod-horizontal"></div>
+                <div class="rope"></div>
+                <div class="head"></div>
+                <div class="hisBody"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <div class="word"></div>
+            <div class="letters"></div>
+            <div class="result"></div>
+            <div class="retry">
+                <button><img src="retry.png" alt="retry"> </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
