@@ -42,12 +42,15 @@ function playGame() {
                 document.querySelector(".difficulty").style.display = "none";
                 // Display Categories 
                 callback(data[e.target.id], chooseRandomWord);
+                // Setting number of hints
                 document.getElementById('hintsRemaining').textContent = (e.target.id === "easy" ? 1 : (e.target.id == "medium" ? 2 : 4));
             });
         });
     }
 
     function displayCategories(chosenDifficultyData, callback) {
+
+        // displaying the categories in the chosen level
         var categoriesInChosen = Object.keys(chosenDifficultyData);
         var categories = document.getElementById('container-categories');
         categoriesInChosen.forEach(function (category) {
@@ -74,6 +77,7 @@ function playGame() {
     }
 
     function chooseRandomWord(wordsInChosenCategory, callback) {
+        // Choosing a random word from the words existing in the category chosen
         var randomWord = wordsInChosenCategory[Math.floor(Math.random() * wordsInChosenCategory.length)];
         callback(randomWord, startGuessing);
     }
@@ -91,6 +95,7 @@ function playGame() {
 
     function startGuessing(chosenWord) {
 
+        // displaying the number of hints 
         document.getElementById("numberOfHints").style.display = "block";
 
         var correctLetters = {};
@@ -100,6 +105,7 @@ function playGame() {
             correctLetters[letterCode].push(i);
         }
 
+        // adding event listiner on correct letters to mark them as correct and display the letters in the word
         for (var charCode in correctLetters) {
             var letterButton = document.getElementById(charCode);
             letterButton.addEventListener('click', (e) => {
@@ -107,6 +113,7 @@ function playGame() {
             });
         }
 
+        // Giving a hint
         document.getElementById("hintButton").addEventListener('click', () => {
             var remaining = Number(document.getElementById("hintsRemaining").textContent);
             if (remaining === 0) {
@@ -115,6 +122,7 @@ function playGame() {
             else {
                 remaining--;
                 document.getElementById("hintsRemaining").textContent = remaining;
+                // choosing from unguessed letters only
                 var availableLetters = [];
                 var lettersInWordSofar = document.querySelector(".word").children;
                 for (var l = 0; l < lettersInWordSofar.length; l++) {
@@ -125,11 +133,13 @@ function playGame() {
                     }
                 }
                 var randomIdx = Math.floor(Math.random() * (availableLetters.length - 1));
+                // somewhat treating the hinted letter as a correct guess to display the letter in the word and disable it's button
                 gotOneRight(chosenWord.length, correctLetters, String(availableLetters[randomIdx]), "hint");
             }
 
         });
 
+        // counting wrong guesses 
         var wrongChoices = 0;
         for (var letter = 0; letter < 26; letter++) {
             var curLetterCode = (letter + 65).toString();
@@ -141,6 +151,7 @@ function playGame() {
                 e.target.classList.add('wrong');
                 e.target.disabled = true;
                 gotOneWrong(wrongChoices++);
+                // 6 body parts revealed = game over
                 if (wrongChoices == 6) {
                     giveVerdict(false, chosenWord);
                 }
@@ -148,6 +159,7 @@ function playGame() {
         }
     }
 
+    // displaying and marking the correct guessed letter and disabling its button
     function gotOneRight(numberOfletters, correctLetters, letterCode, classToAdd) {
 
         document.getElementById(letterCode).classList.add('correct');
@@ -170,11 +182,13 @@ function playGame() {
         }
     }
 
+    // revealing the next body part
     function gotOneWrong(counter) {
         var hangmanParts = ['.head', '.hisBody', '.arm.left', '.arm.right', '.leg.left', '.leg.right'];
         document.querySelector(hangmanParts[counter]).classList.add('show');
     }
 
+    // displaying the final result pop-up and disabling all the buttons
     function giveVerdict(verdict, answer) {
         document.querySelectorAll(".Alphabet").forEach(btn => btn.disabled = true);
         document.getElementById("hintButton").disabled = true;
