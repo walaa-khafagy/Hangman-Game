@@ -49,8 +49,18 @@
             <div class="word"></div>
             <div class="letters"></div>
             <div class="result"></div>
-            <div class="retry">
-                <button><img src="retry.png" alt="retry"> </button>
+            <div class="hintAndRetry">
+                <div><button id="hintButton"><img src="Assets/hint.png" alt="hint"> </button></div>
+                <div id="numberOfHints"><p>You have <span id="hintsRemaining"></span> hints</p></div>
+                <div><button id="retryButton"><img src="Assets/retry.png" alt="retry"> </button></div>
+            </div>
+            <div id="gameModal" class="modal">
+                <div class="modal-content">
+                    <h2 id="modalTitle"></h2>
+                    <div id="modalVisual"></div>
+                    <p id="modalMessage"></p>
+                    <button id="modalBtn">Play Again</button>
+                </div>
             </div>
         </div>
     </div>

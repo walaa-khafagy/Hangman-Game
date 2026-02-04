@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url("background.jpg");
+    background-image: url("./Assets/background.jpg");
     background-repeat: repeat;
     font-family: "Fredoka", sans-serif;
 }
@@ -27,51 +27,35 @@ html {
 
 .game {
     background-color: #eff1f2;
-    width: 50%;
+    width: 60%;
     min-height: 90vh;
     padding: 1rem;
     margin: 5rem auto;
     border: 5px solid #967E76;
     border-radius: 5rem;
-    display: flex;
-    flex-direction: column;
 }
 
 h1 {
     margin: 2%;
     text-align: center;
-    font-size: 6rem;
+    font-size: 7rem;
     color: #967E76;
 }
 
 p {
     padding: 0.5%;
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 button {
     padding: 1rem;
     margin: 0.5rem;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 2.5rem;
     border-radius: 1rem;
 }
 
 button:hover {
-    background-color: #EEE3CB;
-}
-
-.difficulty-button.chosen-difficulty {
-    background-color: #EEE3CB;
-    border: 0.2rem solid #D7C0AE;
-    cursor: not-allowed;
-}
-
-.difficulty-button.chosen-difficulty:disabled {
-    color: black;
-}
-
-.difficulty-button.chosen-difficulty:disabled:hover {
     background-color: #EEE3CB;
 }
 
@@ -92,24 +76,12 @@ button:disabled:hover {
     padding: 1.5rem;
 }
 
-.category-button.chosen-category {
-    background-color: #EEE3CB;
-    border: 0.2rem solid #D7C0AE;
-    cursor: not-allowed;
-}
-
-.category-button.chosen-category:disabled {
-    color: black;
-}
-
-.category-button.chosen-category:disabled:hover {
-    background-color: #EEE3CB;
-}
-.chosen-info{
+.chosen-info {
     display: flex;
     justify-content: center;
 }
-#chosen-difficulty-text, 
+
+#chosen-difficulty-text,
 #chosen-category-text {
     width: fit-content;
     margin: 1rem;
@@ -117,8 +89,10 @@ button:disabled:hover {
     background-color: #D7C0AE;
     border-radius: 0.5rem;
     display: none;
+    font-size: 3rem;
 
 }
+
 .word {
     display: flex;
     justify-content: center;
@@ -130,20 +104,30 @@ button:disabled:hover {
     margin-bottom: 2rem;
 }
 
-.word .letter {
+.word .letter.correctGuess {
     color: rgb(4, 129, 4);
     font-weight: 500;
+    background-color: rgb(220, 237, 194);
+}
+
+.word .letter.reveal {
+    color: rgb(77, 1, 1);
+    font-weight: 500;
+    background-color: rgb(237, 206, 206);
+}
+
+.word .letter.hint {
+    color: rgb(110, 73, 0);
+    font-weight: 500;
+    background-color: rgb(250, 245, 159);
 }
 
 .letters {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    width: 80%;
+    margin:1rem auto;
+    width: 70%;
 }
 
 .letter {
@@ -183,7 +167,7 @@ button:disabled:hover {
 
 .hangman {
     position: relative;
-    width: 21rem;
+    width: 27.5rem;
     height: 25rem;
     margin: 2rem auto;
 }
@@ -192,58 +176,58 @@ button:disabled:hover {
     position: absolute;
     bottom: 0;
     width: 8rem;
-    height: 0.5rem;
+    height: 0.7rem;
     border-radius: 60%;
-    background-color: black;
+    background-color: #5b443f;
 
 }
 
 .rod-vertical {
     position: absolute;
-    left: 3.75rem;
+    left: 3.5rem;
     bottom: 0;
-    width: 0.5rem;
+    width: 1rem;
     height: 25rem;
     border-radius: 25%;
-    background-color: black;
+    background-color: #5b443f;
 }
 
 .rod-horizontal {
     position: absolute;
     left: 3rem;
     bottom: 24rem;
-    width: 15rem;
-    height: 0.45rem;
+    width: 22rem;
+    height: 0.7rem;
     border-radius: 40%;
-    background-color: black;
+    background-color: #5b443f;
 }
 
 .rope {
     position: absolute;
     top: 0;
-    left: 17rem;
-    width: 0.4rem;
+    left: 23.5rem;
+    width: 0.7rem;
     height: 4rem;
     border-radius: 70%;
-    background-color: black;
+    background-color: #5b443f;
 }
 
 .head {
     position: absolute;
     top: 3.5rem;
-    left: 15.75rem;
-    width: 3rem;
-    height: 3rem;
-    border: 0.4rem solid black;
+    left: 22.1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: black;
     border-radius: 100%;
-    display: none;
+    display: none; 
 }
 
 .hisBody {
     position: absolute;
-    top: 6.5rem;
-    left: 17rem;
-    width: 0.4rem;
+    top: 7rem;
+    left: 23.5rem;
+    width: 0.5rem;
     height: 6rem;
     border-radius: 30%;
     background-color: black;
@@ -262,19 +246,19 @@ button:disabled:hover {
 
 .arm.left,
 .leg.left {
-    left: 18.75rem;
+    left: 25.5rem;
     transform: rotate(135deg);
 }
 
 .arm.right,
 .leg.right {
-    left: 15.25rem;
+    left: 21.6rem;
     transform: rotate(-135deg);
 }
 
 .leg {
     position: absolute;
-    top: 11.5rem;
+    top: 12rem;
     width: 0.4rem;
     height: 5rem;
     border-radius: 50%;
@@ -286,22 +270,85 @@ button:disabled:hover {
     display: block;
 }
 
-.retry {
+.hintAndRetry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.hintAndRetry div {
     width: 10%;
-    align-self: flex-end;
-    margin-right: 2rem;
+    margin: 2rem;
 }
 
-.retry img {
+.hintAndRetry button {
     width: 100%;
-}
-
-.retry button {
+    margin: 2rem 0.5rem;
     border: none;
     border-radius: 100%;
     padding: 0;
 }
 
+.hintAndRetry button img {
+    width: 100%;
+}
+
+#numberOfHints {
+    margin-right: auto;
+    width: 30%;
+    align-content: center;
+    text-align: left;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modal-content {
+    background-color: #cdd3d8;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    width: 30%;
+    min-width: 80vh;
+}
+
+.modal-content.win {
+    border: 0.5rem solid #4caf50;
+}
+
+.modal-content.lose {
+    border: 0.5rem solid #f44336;
+}
+
+#modalVisual img {
+    margin: 1rem auto;
+}
+
+#modalVisual .hangman {
+    transform: scale(0.8);
+    padding: 0;
+}
+#numberOfHints {
+    display: none;
+    font-size: 1.5rem;
+}
+#hintsRemaining {
+    font-weight: 500;
+    color: #5b443f;
+}
 /* 
 color palette
 #cdd3d8

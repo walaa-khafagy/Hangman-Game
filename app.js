@@ -1,5 +1,3 @@
-
-
 function loadLetters() {
     var letters = document.querySelector('.letters');
     for (var i = 0; i < 26; i++) {
@@ -12,22 +10,19 @@ function loadLetters() {
     }
 }
 
-
 function playGame() {
-    
+
     loadLetters();
     loadData(chooseDifficulty);
-    
-    var data = [];
+
     function loadData(callback) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'data.json', true);
-        
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 try {
-                    data = JSON.parse(xhr.responseText);
-                    callback( displayCategories);
+                    var data = JSON.parse(xhr.responseText);
+                    callback(data, displayCategories);
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
                     alert("There is a problem with loading the data, Try again!")
@@ -37,34 +32,24 @@ function playGame() {
         xhr.send();
     }
 
-    function chooseDifficulty( callback) {
-
+    function chooseDifficulty(data, callback) {
         var difficultyButtons = document.querySelectorAll('.difficulty-button');
-
         difficultyButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.target.classList.add('chosen-difficulty');
-
                 document.getElementById("chosen-difficulty-text").innerText = e.target.innerText;
                 document.getElementById("chosen-difficulty-text").style.display = "inline-block";
-
                 // hide difficulty buttons section
                 document.querySelector(".difficulty").style.display = "none";
-
                 // Display Categories 
                 callback(data[e.target.id], chooseRandomWord);
-
-                difficultyButtons.forEach(other => { other.disabled = true; });
+                document.getElementById('hintsRemaining').textContent = (e.target.id === "easy" ? 1 : (e.target.id == "medium" ? 2 : 4));
             });
         });
     }
 
     function displayCategories(chosenDifficultyData, callback) {
-
         var categoriesInChosen = Object.keys(chosenDifficultyData);
-
         var categories = document.getElementById('container-categories');
-
         categoriesInChosen.forEach(function (category) {
             var tempButton = document.createElement("button");
             tempButton.innerText = category;
@@ -72,33 +57,21 @@ function playGame() {
             tempButton.classList.add('category-button');
             categories.insertAdjacentElement('beforeend', tempButton);
         });
-
         document.querySelector('.categories').style.display = "block";
 
         // User chooses category
         var categoryButtons = document.querySelectorAll('.category-button');
-
         categoryButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.target.classList.add('chosen-category');
-
-                categoryButtons.forEach(other => { other.disabled = true; });
-
                 document.getElementById("chosen-category-text").innerText = e.target.innerText;
                 document.getElementById("chosen-category-text").style.display = "inline-block";
-
                 // hide category buttons
                 document.querySelector(".categories").style.display = "none";
-
-                // console.log(chosenDifficultyData[e.target.id]);
                 // Choosing a random word 
                 callback(chosenDifficultyData[e.target.id], displaytheWordBox);
-
             });
         });
-
     }
-
 
     function chooseRandomWord(wordsInChosenCategory, callback) {
         var randomWord = wordsInChosenCategory[Math.floor(Math.random() * wordsInChosenCategory.length)];
@@ -106,8 +79,6 @@ function playGame() {
     }
 
     function displaytheWordBox(chosenWord, callback) {
-
-        console.log("chosen random word: ", chosenWord);
         var word = document.querySelector(".word");
         for (var i = 0; i < chosenWord.length; i++) {
             var letter = document.createElement("div");
@@ -120,32 +91,44 @@ function playGame() {
 
     function startGuessing(chosenWord) {
 
+        document.getElementById("numberOfHints").style.display = "block";
+
         var correctLetters = {};
         for (var i = 0; i < chosenWord.length; i++) {
             var letterCode = chosenWord.toUpperCase().charCodeAt(i).toString();
             correctLetters[letterCode] = correctLetters[letterCode] || [];
             correctLetters[letterCode].push(i);
         }
-        console.log(correctLetters);
 
-        var correctChoices = 0;
         for (var charCode in correctLetters) {
-            console.log(charCode);
             var letterButton = document.getElementById(charCode);
-
             letterButton.addEventListener('click', (e) => {
-                gotOneRight(correctLetters, e.target.id);
-                e.target.classList.add('correct');
-                e.target.disabled = true;
-                correctChoices += correctLetters[e.target.id].length;
-                console.log(correctChoices);
-
-                if (correctChoices == chosenWord.length) {
-                    console.log("CONGRATULATIONS");
-                    giveVerdict(true, "");
-                }
+                gotOneRight(chosenWord.length, correctLetters, e.target.id, "correctGuess");
             });
         }
+
+        document.getElementById("hintButton").addEventListener('click', () => {
+            var remaining = Number(document.getElementById("hintsRemaining").textContent);
+            if (remaining === 0) {
+                alert("You have no hints remaining!");
+            }
+            else {
+                remaining--;
+                document.getElementById("hintsRemaining").textContent = remaining;
+                var availableLetters = [];
+                var lettersInWordSofar = document.querySelector(".word").children;
+                for (var l = 0; l < lettersInWordSofar.length; l++) {
+                    if (lettersInWordSofar[l].classList.contains("correctGuess") || lettersInWordSofar[l].classList.contains("hint")) {
+                        continue;
+                    } else {
+                        availableLetters.push(chosenWord.toUpperCase().charCodeAt(l));
+                    }
+                }
+                var randomIdx = Math.floor(Math.random() * (availableLetters.length - 1));
+                gotOneRight(chosenWord.length, correctLetters, String(availableLetters[randomIdx]), "hint");
+            }
+
+        });
 
         var wrongChoices = 0;
         for (var letter = 0; letter < 26; letter++) {
@@ -160,21 +143,30 @@ function playGame() {
                 gotOneWrong(wrongChoices++);
                 if (wrongChoices == 6) {
                     giveVerdict(false, chosenWord);
-                    console.log("GAME OVER");
                 }
             });
         }
-
     }
 
-    function gotOneRight(correctLetters, letterCode) {
+    function gotOneRight(numberOfletters, correctLetters, letterCode, classToAdd) {
 
+        document.getElementById(letterCode).classList.add('correct');
+        document.getElementById(letterCode).disabled = true;
         for (var i = 0; i < correctLetters[letterCode].length; i++) {
-            console.log(correctLetters[letterCode][i]);
             var position = document.getElementById('guessLetter' + correctLetters[letterCode][i]);
             position.innerText = String.fromCharCode(letterCode);
-            position.style.background = "rgb(220, 237, 194)";
+            position.classList.add(classToAdd)
+        }
 
+        var idx = 0;
+        while (idx < numberOfletters &&
+            (document.getElementById('guessLetter' + idx).classList.contains("hint") ||
+                document.getElementById('guessLetter' + idx).classList.contains("correctGuess"))) {
+            idx++;
+        }
+
+        if (idx == numberOfletters) {
+            giveVerdict(true, "");
         }
     }
 
@@ -185,25 +177,48 @@ function playGame() {
 
     function giveVerdict(verdict, answer) {
         document.querySelectorAll(".Alphabet").forEach(btn => btn.disabled = true);
-        document.querySelector(".result").innerText = (verdict ? "CONGRATULATIONS" : ("GAME OVER, the word is " + answer));
-        document.querySelector(".result").classList.add(verdict ? "win" : "lose");
+        document.getElementById("hintButton").disabled = true;
+
+        var modal = document.getElementById("gameModal");
+        var title = document.getElementById("modalTitle");
+        var msg = document.getElementById("modalMessage");
+        var content = document.querySelector(".modal-content");
+
+        if (verdict) {
+            content.classList.add("win");
+            title.innerText = "CONGRATULATIONS!";
+            msg.innerText = "You won! Great job!";
+            var wellDone = document.createElement("img");
+            wellDone.src = "Assets/well done.gif";
+            wellDone.style.width = "40%";
+            document.getElementById("modalVisual").appendChild(wellDone);
+        } else {
+            content.classList.add("lose");
+            title.innerText = "GAME OVER";
+            var word = document.querySelector(".word")
+            var wordChildren = word.children;
+            for (var i = 0; i < wordChildren.length; i++) {
+                if (wordChildren[i].classList.contains("correctGuess") || wordChildren[i].classList.contains("hint"))
+                    console.log(wordChildren[i]);
+                else {
+                    wordChildren[i].innerText = answer[i].toUpperCase();
+                    wordChildren[i].classList.add("reveal");
+                }
+            }
+            msg.innerText = "The word is:";
+            var wordClone = word.cloneNode(true);
+            document.querySelector(".modal-content").insertBefore(wordClone, document.getElementById("modalBtn"));
+
+            var gameHangman = document.querySelector(".hangman");
+            var hangmanClone = gameHangman.cloneNode(true);
+            document.getElementById("modalVisual").appendChild(hangmanClone);
+        }
+        document.getElementById("modalBtn").addEventListener('click', () => window.location.reload());
+        setTimeout(() => { modal.classList.add("show"); }, 500);
     }
 
+    document.getElementById("retryButton").addEventListener('click', () => window.location.reload());
 
-    function restartGame() {
-        document.getElementById("chosen-difficulty-text").innerText = "";
-        document.getElementById("chosen-difficulty-text").style.display = "none";
-        document.getElementById("chosen-category-text").innerText = "";
-        document.getElementById("chosen-category-text").style.display = "none";
-
-
-
-    }
 }
 
 playGame();
-
-
-
-
-
