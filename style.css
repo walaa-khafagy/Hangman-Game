@@ -117,7 +117,7 @@ button:disabled:hover {
 }
 
 .word .letter.hint {
-    color: rgb(110, 73, 0);
+    color: rgb(77, 1, 1);
     font-weight: 500;
     background-color: rgb(250, 245, 159);
 }
@@ -126,7 +126,7 @@ button:disabled:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin:1rem auto;
+    margin: 1rem auto;
     width: 70%;
 }
 
@@ -207,63 +207,81 @@ button:disabled:hover {
     top: 0;
     left: 23.5rem;
     width: 0.7rem;
-    height: 4rem;
+    height: 4.4rem;
     border-radius: 70%;
     background-color: #5b443f;
 }
 
 .head {
     position: absolute;
+    left: 21.85rem;
+    width: 4rem;
+    height: 4rem;
     top: 3.5rem;
-    left: 22.1rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    background-color: black;
-    border-radius: 100%;
-    display: none; 
+    display: none;
+}
+
+.head::before {
+    font-family: "Material Symbols Outlined";
+    content: '\e7f3';
+    font-size: 4rem;
+    color: black;
 }
 
 .hisBody {
     position: absolute;
-    top: 7rem;
-    left: 23.5rem;
-    width: 0.5rem;
-    height: 6rem;
-    border-radius: 30%;
-    background-color: black;
+    top: 7.5rem;
+    left: 22rem;
+    width: 3.6rem;
+    height: 5.5rem;
+    border-radius: 2rem 2rem 1rem 1rem;
+    border: 0.32rem solid black;
+    background-color: #eff1f2;
+    z-index: 3;
     display: none;
 }
 
 .arm {
     position: absolute;
-    top: 6.5rem;
-    width: 0.4rem;
-    height: 5rem;
-    border-radius: 50%;
-    background-color: black;
+    top: 7.75rem;
+    width: 1rem;
+    height: 4rem;
+    border: 0.32rem solid black;
+    border-radius: 0.6rem 0.6rem 0.3rem 0.3rem;
+    z-index: 2;
     display: none;
 }
 
-.arm.left,
-.leg.left {
-    left: 25.5rem;
-    transform: rotate(135deg);
+.arm.right {
+    left: 21.1rem;
+    transform: rotate(-135deg);
 }
 
-.arm.right,
-.leg.right {
-    left: 21.6rem;
-    transform: rotate(-135deg);
+.arm.left {
+    left: 25.65rem;
+    transform: rotate(135deg);
 }
 
 .leg {
     position: absolute;
     top: 12rem;
-    width: 0.4rem;
-    height: 5rem;
-    border-radius: 50%;
-    background-color: black;
+    width: 1rem;
+    height: 4.5rem;
+    border: 0.32rem solid black;
+    border-radius: 0.6rem 0.6rem 0.3rem 0.3rem;
+    z-index: 2;
     display: none;
+}
+
+.leg.right {
+    left: 22.5rem;
+    transform: rotate(-180deg);
+}
+
+.leg.left {
+    left: 24rem;
+    transform: rotate(180deg);
+    z-index: 2;
 }
 
 .show {
@@ -303,7 +321,7 @@ button:disabled:hover {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
     align-items: center;
@@ -317,7 +335,7 @@ button:disabled:hover {
 }
 
 .modal-content {
-    background-color: #cdd3d8;
+    background-color: #eff1f2;
     padding: 3rem;
     border-radius: 1.5rem;
     text-align: center;
@@ -341,14 +359,17 @@ button:disabled:hover {
     transform: scale(0.8);
     padding: 0;
 }
+
 #numberOfHints {
     display: none;
     font-size: 1.5rem;
 }
+
 #hintsRemaining {
     font-weight: 500;
     color: #5b443f;
 }
+
 /* 
 color palette
 #cdd3d8
