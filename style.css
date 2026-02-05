@@ -202,35 +202,63 @@ button:disabled:hover {
     background-color: #5b443f;
 }
 
+.rod-diagonal {
+    position: absolute;
+    left: 1.75rem;
+    top: 1.75rem;
+    width: 7rem;
+    height: 0.7rem;
+    border-radius: 40%;
+    transform: rotate(-45deg);
+    background-color: #5b443f;
+}
+
 .rope {
     position: absolute;
-    top: 0;
-    left: 23.5rem;
-    width: 0.7rem;
+    top: 0.75rem;
+    left: 21rem;
+    background-image: url("../Assets/rope.png");
+    width: 6rem;
+    height: 8rem;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* background-position: center; */
+
+    /* width: 0.7rem;
     height: 4.4rem;
     border-radius: 70%;
-    background-color: #5b443f;
+    background-color: #5b443f; */
 }
 
 .head {
     position: absolute;
     left: 21.85rem;
+    background-color: #eff1f2;
     width: 4rem;
-    height: 4rem;
-    top: 3.5rem;
+    height: 3.5rem;
+    top: 4rem;
+    border-radius: 100%;
+    z-index: 2;
     display: none;
 }
 
 .head::before {
+    transform: translateY(-0.7rem);
     font-family: "Material Symbols Outlined";
     content: '\e7f3';
     font-size: 4rem;
+    border-radius: 100%;
+    margin: 0;
+    padding: 0;
     color: black;
+    display: block;
+
 }
 
 .hisBody {
     position: absolute;
-    top: 7.5rem;
+    top: 7.3rem;
     left: 22rem;
     width: 3.6rem;
     height: 5.5rem;
