@@ -213,7 +213,7 @@ function playGame() {
             var wordChildren = word.children;
             for (var i = 0; i < wordChildren.length; i++) {
                 if (wordChildren[i].classList.contains("correctGuess") || wordChildren[i].classList.contains("hint"))
-                    console.log(wordChildren[i]);
+                    continue;
                 else {
                     wordChildren[i].innerText = answer[i].toUpperCase();
                     wordChildren[i].classList.add("reveal");
@@ -227,6 +227,7 @@ function playGame() {
             var hangmanClone = gameHangman.cloneNode(true);
             document.getElementById("modalVisual").appendChild(hangmanClone);
         }
+        document.querySelector(".close").addEventListener('click' , () => modal.style.display = "none" );
         document.getElementById("modalBtn").addEventListener('click', () => window.location.reload());
         setTimeout(() => { modal.classList.add("show"); }, 500);
     }
