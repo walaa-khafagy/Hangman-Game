@@ -1,6 +1,4 @@
-﻿# Hangman-Game
-
- # Hangman Game (Vanilla JavaScript)
+# Hangman Game (Vanilla JavaScript)
 
 A fully interactive Hangman game built using HTML, CSS, and Vanilla JavaScript.  
 The game supports multiple difficulty levels, categories, hints, visual feedback, and a final result modal with animations.
@@ -30,5 +28,34 @@ The game supports multiple difficulty levels, categories, hints, visual feedback
 4. Use hints if available
 5. Avoid making 6 wrong guesses
 6. Win by guessing all letters correctly
+
+--- 
+
+## Game Logic Overview
+
+- Alphabet buttons are generated dynamically at the start of the game.
+
+- Word data is loaded from an external JSON file.
+
+- The player selects a difficulty level, which sets the number of hints and available categories.
+
+- The player selects a category, and a random word is chosen.
+
+- Empty letter boxes are created based on the selected word length.
+
+- The game tracks correct letter positions internally.
+
+- Correct guesses reveal all matching letters and disable the selected button.
+
+- Wrong guesses reveal hangman body parts and increase the mistake counter.
+
+- Hints reveal a random unrevealed letter and reduce remaining hints.
+
+- The game ends when:
+  - All letters are revealed (win)
+  - All hangman parts are revealed (loss)
+
+- A modal popup displays the final result and allows the player to restart.
+
 
 
