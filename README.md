@@ -57,5 +57,11 @@ The game supports multiple difficulty levels, categories, hints, visual feedback
 
 - A modal popup displays the final result and allows the player to restart.
 
+--- 
+## Live Demo
+
+[Play Hangman Game!](https://walaa-khafagy.github.io/Hangman-Game/)
+
+
 
 
